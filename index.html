@@ -1,182 +1,111 @@
-<!doctype html>
-<html lang="es">
-   <head>
-        <title>Remisses Alas - Mobile</title> 
-  
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css" />
-        <script src="lib/jquery-1.8.2.min.js"></script>
-        <script src="lib/jquery.mobile-1.2.0.min.js"></script>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&sensor=false&language=es-AR"></script>
-        <script type="text/javascript">
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>nativeDroid - Theme for jQuery Mobile</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
 
-            var map,
-                currentPosition,
-                directionsDisplay, 
-                directionsService,
-                destinationLatitude = -37.328095,
-                destinationLongitude =  -59.135735;
+		<!-- jQueryMobileCSS - original without styling -->
+        <link rel="stylesheet" href="css/jquerymobile.css" />
 
-            function initializeMapAndCalculateRoute(lat, lon)
-            {
-                directionsDisplay = new google.maps.DirectionsRenderer(); 
-                directionsService = new google.maps.DirectionsService();
+		<!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
 
-                currentPosition = new google.maps.LatLng(lat, lon);
+		<!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.dark.css"  id='jQMnDTheme' />
 
-                map = new google.maps.Map(document.getElementById('map_canvas'), {
-                   zoom: 15,
-                   center: currentPosition,
-                   mapTypeId: google.maps.MapTypeId.ROADMAP
-                 });
+		<!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
 
-                directionsDisplay.setMap(map);
+		<!-- jQuery / jQueryMobile Scripts -->
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+	
+	<style>
+		#Logo {
+    		/*display: block;
+    		margin: 1em auto 0;*/
+    		width: 30px;
+		float:left;
+		}
+	</style>
 
-                 var currentPositionMarker = new google.maps.Marker({
-                    position: currentPosition,
-                    map: map,
-                    title: "Ubicación actual"
-                });
-
-                // current position marker info
-                /*
-                var infowindow = new google.maps.InfoWindow();
-                google.maps.event.addListener(currentPositionMarker, 'click', function() {
-                    infowindow.setContent("Current position: latitude: " + lat +" longitude: " + lon);
-                    infowindow.open(map, currentPositionMarker);
-                });
-                */
-
-                // calculate Route
-                calculateRoute();
-            }
-
-            function locError(error) {
-               // the current position could not be located
-            }
-
-            function locSuccess(position) {
-                // initialize map with current position and calculate the route
-                initializeMapAndCalculateRoute(position.coords.latitude, position.coords.longitude);
-            }
-
-            function calculateRoute() {
-
-                var targetDestination =  new google.maps.LatLng(destinationLatitude, destinationLongitude);
-                if (currentPosition != '' && targetDestination != '') {
-
-                    var request = {
-                        origin: currentPosition, 
-                        destination: targetDestination,
-                        travelMode: google.maps.DirectionsTravelMode["DRIVING"]
-                    };
-
-                    directionsService.route(request, function(response, status) {
-                        if (status == google.maps.DirectionsStatus.OK) {
-                            directionsDisplay.setPanel(document.getElementById("directions"));
-                            directionsDisplay.setDirections(response); 
-
-                            /*
-                                var myRoute = response.routes[0].legs[0];
-                                for (var i = 0; i < myRoute.steps.length; i++) {
-                                    alert(myRoute.steps[i].instructions);
-                                }
-                            */
-                            $("#results").show();
-                        }
-                        else {
-                            $("#results").hide();
-                        }
-                    });
-                }
-                else {
-                    $("#results").hide();
-                }
-            }
-
-            $(document).live("pagebeforeshow", "#map_page", function() {
-                // find current position and on success initialize map and calculate the route
-                navigator.geolocation.getCurrentPosition(locSuccess, locError);
-            });
-
-        </script>
-       
     </head>
     <body>
-     <style>
-     .car {
-		 background-image:url(41.png);
-		 background-repeat:no-repeat;
-		 vertical-align:central;
-		 margin-top:9px;
-		 }
-     
-     </style>
-    <!-- begin first page --> 
-    <section id="page1" data-role="page" >     
-    	<header data-role="header" data-theme="b"><h1>Remisses ALAS</h1></header>  
-        	<div data-role="content" class="content">  
-            	<img src="logo.png"  /> 
-                <p><strong>Bienvenidos a remisses ALAS!</strong></p>     
-                <div data-role="controlgroup">              
-                    <a href="#page1" data-role="button">   <img src="43.png" align="left" /> Pedir remisse   </a>
-                    <a href="#alascerca" data-role="button">   <img src="location.png" align="left" /> ALAS más cercano   </a>
-                    <a href="#envivo" data-role="button">   <img src="facebook.png" align="left" /> Visitar nuestro Facebook  </a>
-                </div>
-             </div>  
-         <footer data-role="footer" data-theme="b"><h1>Tel.:422-2222</h1></footer> 
-    </section> <!-- end first page -->
-    <!-- Begin second page -->
-    <section id="alascerca" data-role="page">
-    	<header data-role="header"><h1>Remisses ALAS</h1></header>
-          <div data-role="content" class="content">    
-          	<p>Oficinas de ALAS</p>    
-           <div data-role="content">   
-                <div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
-                    <div id="map_canvas" style="height:350px;"></div>
-                </div>
-                <div id="results" style="display:none;">
-                    <div id="directions"></div>
-                </div>
-            </div>
-          </div>  
-          <footer data-role="footer"><h1>Tel.:422-2222</h1></footer> 
-    </section> <!-- end second page -->
-      <!-- Begin envivo page -->
-    <section id="envivo" data-role="page">
-      <div data-role="page" data-fullscreen="true">
-		<div data-role="header" data-position="fixed">
-			<h3>Header</h3>
-			</div>
-		<div data-role="content">
-		<script src="http://cdn.octoshape.net/resources/player/jwflvplayer/5/jwplayer.js" type="text/javascript"></script>
-		<div id="player" style="margin-left:5px"><a href="http://www.adobe.com/go/getflashplayer"><img width="524" height="337" src="https://d2iwzbhgddzdwl.cloudfront.net/files/images/flashreq.png" alt="Get Adobe Flash player" /></a></div>
-		<script type="text/javascript">
-			jwplayer("player").setup({
-				flashplayer: "http://cdn.octoshape.net/resources/player/jwflvplayer/5/jwplayer-5.7.swf",
-				file: "octoshape://streams.octoshape.net/datco/garage/live/flv/ch1/abr",
-				provider: "http://cdn.octoshape.net/resources/player/jwflvplayer/5/jwplayer-octoshape-mediaprovider2.swf",
-				width: 524,
-				height: 337,
-				autostart: true
-			});
-		</script>
-		</div>
-		<div data-role="footer" data-position="fixed">
-		<h3>Footer</h3>
-		</div>
-</div>
-    </section> <!-- end envivo page -->
-    <!-- begin third page -->
-    <section id="page3" data-role="page"> 
-         <header data-role="header"><h1>Remisses ALAS</h1></header>  
-         <div data-role="content" class="content">    
-         	<p>Third page!</p>    
-            <p><a href="#page1">Go back to First Page</a></p>  
-         </div>  
-         <footer data-role="footer"><h1>Tel.:422-2222</h1></footer> 
-     </section> <!-- end third page -->
+        
+    <div data-role="page" data-theme='b'>
 
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+            <img id="Logo" src="images/logo.png"  /><h1>El Garage TV</h1>
+        </div>
+        
+        <div data-role="content">   
+
+			<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
+	            <li data-role="list-divider">Demos</li>
+	            <li >
+					<a href="text.html" data-ajax="false"><i class='icon-align-left'></i> Text Elements</a>
+	            </li>
+	            <li >
+					<a href="headerfooter.html" data-ajax="false"><i class='icon-angle-down'></i> Header &amp; Footer</a>
+	            </li>
+	            <li>
+					<a href="tables.html" data-ajax="false"><i class='icon-table'></i> Tables</a>
+	            </li>
+	            <li>
+					<a href="dialogsnpopups.html" data-ajax="false"><i class='icon-external-link'></i> Dialogs &amp; Popups</a>
+	            </li>
+	            <li>
+					<a href="panels.html" data-ajax="false"><i class='icon-tasks'></i> Panels</a>
+	            </li>
+	            <li>
+					<a href="autocomplete.html" data-ajax="false"><i class='icon-filter'></i> Autocomplete</a>
+	            </li>
+	            <li>
+					<a href="collapsible.html" data-ajax="false"><i class='icon-chevron-up'></i> Collapsible</a>
+	            </li>
+	            <li>
+					<a href="accordions.html" data-ajax="false"><i class='icon-chevron-right'></i> Accordions</a>
+	            </li>
+	            <li>
+					<a href="listviews.html" data-ajax="false"><i class='icon-list'></i> Listviews</a>
+	            </li>
+	            <li>
+					<a href="forms.html" data-ajax="false"><i class='icon-external-link'></i> Forms</a>
+	            </li>
+	            <li data-role="list-divider">Experimental</li>
+	            <li>
+					<a href="cards.html" data-ajax="false"><i class='icon-reorder'></i> Cards</a>
+	            </li>
+	            <li>
+					<a href="gallery.html" data-ajax="false"><i class='icon-picture'></i> Gallery</a>
+	            </li>
+	            <li>
+					<a href="homescreen.html" data-ajax="false"><i class='icon-home'></i> Homescreen</a>
+	            </li>
+	            <li data-role="list-divider">Information</li>
+	            <li >
+					<a href="gettingstarted.html" data-ajax="false"><i class='icon-magic'></i> Getting started</a>
+	            </li>
+	            <li>
+					<a href="features.html" data-ajax="false"><i class='icon-lightbulb'></i> Features</a>
+	            </li>
+	            <li>
+					<a href="colorsandstyles.html" data-ajax="false"><i class='icon-tint'></i> Colors &amp; Styles</a>
+	            </li>
+	            <li>
+					<a href="icons.html" data-ajax="false"><i class='icon-fire'></i> Icons</a>
+	            </li>
+	            <li>
+					<a href="license.html" data-ajax="false"><i class='icon-legal'></i> Credits &amp; License</a>
+	            </li>
+	        </ul>
+        </div>
+
+    </div>
+    
     </body>
 </html>
