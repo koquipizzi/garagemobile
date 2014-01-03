@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "alas.mobile"
+        id        = "garage.mobile"
         versionCode="10" 
         version   = "1.0.0">
 
     <!-- versionCode is optional and Android only -->
 
-    <name>ALAS</name>
+    <name>El Garage TV</name>
 
     <description>
-        ALAS Remisses - Mobile App
+        El Garage TV - Mobile App
     </description>
 
     <author href="https://www.qwavee.com" email="alejandra@qwavee.com">
