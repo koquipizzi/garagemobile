@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Pop-up - jQuery Mobile: Design and Develop</title>
+</head>
+<body>
+<div data-role="page">
+<div data-role="header"><h1>President Barack Obama’s
+p Inaugural Address</h1></div>
+<div data-role="content">
+
+<script src="http://cdn.octoshape.net/resources/js/flowplayer-3.2.6.min.js" type="text/javascript"></script>
+<div id="player" style="width: 640px; height: 352px;"></div>
+<script type="text/javascript">
+$f("player", {
+		src: 'http://cdn.octoshape.net/resources/player/flowplayer/flowplayer-3.2.7.swf',
+		id: 'player_api',
+		name: 'player_api'
+	},
+	{
+		clip: {	
+			url: "octoshape://streams.octoshape.net/Demo.Trailers.auto",
+			provider: 'octoshape'
+		},
+		plugins: {
+			octoshape: {
+				url: 'http://cdn.octoshape.net/resources/player/flowplayer/OctoshapeStreaming.swf'
+			}
+		}
+	}
+);
+</script>
+
+</div>
+</div>
+</body>
+</html>
