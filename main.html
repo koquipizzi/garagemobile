@@ -1,183 +1,159 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css">
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <head>
+        <title>nativeDroid - Theme for jQuery Mobile</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
 
-<link rel="stylesheet" href="jquery.mobile-1.1.0.custom.css?" />
+		<!-- jQueryMobileCSS - original without styling -->
+        <link rel="stylesheet" href="css/jquerymobile.css" />
+
+		<!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+		<!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.dark.css"  id='jQMnDTheme' />
+
+		<!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
 
 		<!-- jQuery / jQueryMobile Scripts -->
-    <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-	 <script type="text/javascript">
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
 
+
+    </head>
 	
-	var jsonResponse;
-  $.ajax({
-        url        : "http://www.ar.elgarage.com/index.php?option=com_content&view=article&format=raw&id=34&jsoncallback=?",
-   //  url        : "http://192.168.1.171/pruebas/getjson/data.php",
-    //    beforeSend : function() {$.mobile.loading('show')},
-    //    complete   : function() {$.mobile.loading('hide')},
-        data       : {username : 'subin', password : 'passwordx'},
-        success    : function(response) {
-          //  var data = JSON.stringify(response);
-        //  alert(response.noticias[0].title);       
-        //  alert('Works!'); 
-		
-          
-            $.each(response.noticias, function (i, noti) {  
-            	 
-            $("#allRepos").append("<li><h4>" + noti.title + "</h4>"
-            + "<p class=li"+i+"></p></li>");
-			debugger;
-            var aux = ".li"+i;
-            $(aux).html(noti.introtext);  
-        });
+	<script type="text/javascript">	
 
-        },
-         error: function () {
-         	alert('Not working!');      
-          
-        }
-      
-    });     
- 
+	  $.ajax({
+			url        : "http://www.ar.elgarage.com/index.php?option=com_content&view=article&format=raw&id=34&jsoncallback=?",
+			data       : {username : 'subin', password : 'passwordx'},
+			success    : function(response) {
+				$.each(response.noticias, function (i, noti) {              	 
+				$("#allRepos").append("<li class='noti'><h2>" + noti.title + "</h2>"
+				+ "<p class='li"+i+"'></p></li>");
+				var aux = ".li"+i;
+				$(aux).html(noti.introtext);  
+			});
 
-
+			},
+			 error: function () {
+				alert('Not working!');      
+			  
+			}      
+		});     
 	 </script>
-	
 	<style>
 		#Logo {
     		width: 20%;
 			text-align:center;
 			float:left;
 		}
-		#footer {
-		background:#c3c3c3;}
-		
-.ui-header .ui-title, .ui-footer .ui-title {
-    font-size: 25px;
-    font-weight: 300;
-    margin: 10px 25px 7px 34px;
-    text-align: left;
-	color:white;
-}
-	.ui-page {
-    font-family: "Roboto",sans-serif;
-    font-weight: 300;
-}
-
+		.noti {
+			    border-bottom: 1px solid #808080;
+				padding: 10px;				
+		}
 	</style>
-</head>
-<body style="background-image: url(images/textura.jpg);" >
+    <body>
+        
+    <div  id="inicio" data-url="inicio"  data-role="page" data-theme='b'>
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'  style="background-image: url(images/textura.jpg);">
+            <h1><img id="Logo" src="images/logo.png"  />El Garage TV</h1>
+            <a href="http://elgarage.com/" data-ajax='false' target='_blank'></a>
+			<div data-tap-toggle="false" data-role="footer" data-tap-toggle="false" data-theme='b'>
+				<div data-role="navbar">
+					<ul>
+					<li><a href="#inicio" data-icon="star">Noticias</a></li>
+					<li><a href="#programas" data-icon="grid">Programas</a></li>
+					<li><a href="#contacto" data-icon="home">Contacto</a></li>
+					</ul>
+				</div>		
+			</div>
+		</div>
+		
+		 <div data-role="content">   
 
-<div id="inicio" data-url="inicio" data-role="page" style="background-image: url(images/textura.jpg);" >
-<div data-role="header" data-theme="a" style="background-image: url(images/textura.jpg);" >
-	<h1>	<img id="Logo" src="images/logo.png"  />El Garage TV</h1>
-    <div data-role="navbar">
-    <ul>
-    <li><a href="#inicio" data-icon="star">Noticias</a></li>
-    <li><a href="#programas" data-icon="grid">Programas</a></li>
-    <li><a href="#contacto" data-icon="home">Contacto</a></li>
-    </ul>
+			<ul id="allRepos" data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" data-filter="true"> 
+			</ul>
+		</div>      
     </div>
+    <!-- fin de pagina de inicio -->
+	
+	    <div  id="programas" data-url="programas" data-role="page" data-theme='b'>
 
-</div>
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'  style="background-image: url(images/textura.jpg);">
+            <h1><img id="Logo" src="images/logo.png"  />El Garage TV</h1>
+            <a href="http://elgarage.com/" data-ajax='false' target='_blank'></a>
+			<div data-tap-toggle="false" data-role="footer" data-tap-toggle="false" data-theme='b'>
+				<div data-role="navbar">
+					<ul>
+					<li><a href="#inicio" data-icon="star">Noticias</a></li>
+					<li><a href="#programas" data-icon="grid">Programas</a></li>
+					<li><a href="#contacto" data-icon="home">Contacto</a></li>
+					</ul>
+				</div>		
+			</div>
+		</div>
+		
+		 <div data-role="content">   
 
-<div data-role="content">
+			<ul data-role="listview" data-inset="true">
+				<li><img src="images/designcenter.png"><h3>Design Center</h3>
+					<p>Programas</p>
+				</li>
+				<li><img src="images/crazy.png"><h3>Crazy Tuning</h3></li>
+				<li><img src="images/citytour.png"><h3>City Tour</h3></li>
+				<li><img src="images/british.png"><h3>British Charm</h3></li>
+				<li><img src="images/american.png"><h3>American Dreams</h3></li>
+				<li><img src="images/customized.png"><h3>Customized</h3></li>
+				<li><img src="images/evolutioncars.png"><h3>Evolution Cars</h3></li>
+				<li><img src="images/fanclub.png"><h3>Fans Club</h3></li>
+				<li><img src="images/holy.png"><h3>Holy Wheels</h3></li>
+				<li><img src="images/retromobile.png"><h3>Retromobile</h3></li>
+				<li><img src="images/inside.png"><h3>Inside</h3></li>
+				<li><img src="images/motoclassic.png"><h3>Motoclassic</h3></li>
+				<li><img src="images/motorbikes.png"><h3>Motorbikes</h3></li>
+				<li><img src="images/museum.png"><h3>Museum</h3></li>
+				<li><img src="images/motormax.png"><h3>MotorMax</h3></li>
+				<li><img src="images/tester.png"><h3>Tester</h3></li>
+				<li><img src="images/thecollector.png"><h3>The Collector</h3></li>
+				<li><img src="images/garagetv.png"><h3>Garage TV</h3></li>
+			</ul>
+		</div>      
+    </div>
+	
+	<!-- fin programas -->
+	<!-- inicio contacto -->
+	    <div  id="contacto" data-url="contacto" data-role="page" data-theme='b'>
 
-<ul id="allRepos" data-role="listview"  data-filter="true">
-</ul>
-<br><br>qwaveee.
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'  style="background-image: url(images/textura.jpg);">
+            <h1><img id="Logo" src="images/logo.png"  />El Garage TV</h1>
+            <a href="http://elgarage.com/" data-ajax='false' target='_blank'></a>
+			<div data-tap-toggle="false" data-role="footer" data-tap-toggle="false" data-theme='b'>
+				<div data-role="navbar">
+					<ul>
+					<li><a href="#inicio" data-icon="star">Noticias</a></li>
+					<li><a href="#programas" data-icon="grid">Programas</a></li>
+					<li><a href="#contacto" data-icon="home">Contacto</a></li>
+					</ul>
+				</div>		
+			</div>
+		</div>
+		
+		 <div data-role="content">   
 
-</div></div>
-
-<div id="programas" data-url="programas" data-role="page"  style="background-image: url(images/textura.jpg);" >
-<div data-role="header"  style="background-image: url(images/textura.jpg);" >
-<h1>	<img id="Logo" src="images/logo.png"  />El Garage TV</h1>
-<div data-role="navbar">
-<ul>
-<li><a href="#inicio" data-icon="star">Noticias </a></li>
-<li><a href="#programas" data-icon="grid">Programas</a></li>
-<li><a href="#contacto" data-icon="home">Contacto</a></li>
-</ul>
-</div>
-
-</div>
-
-
-<div data-role="content">
-
-<ul data-role="listview" data-inset="true">
-	<li><img src="images/designcenter.png"><h3>Design Center</h3>
-		<p>Programas</p>
-    </li>
-<li><img src="images/crazy.png"><h3>Crazy Tuning</h3></li>
-<li><img src="images/citytour.png"><h3>City Tour</h3></li>
-<li><img src="images/british.png"><h3>British Charm</h3></li>
-<li><img src="images/american.png"><h3>American Dreams</h3></li>
-<li><img src="images/customized.png"><h3>Customized</h3></li>
-<li><img src="images/evolutioncars.png"><h3>Evolution Cars</h3></li>
-<li><img src="images/fanclub.png"><h3>Fans Club</h3></li>
-<li><img src="images/holy.png"><h3>Holy Wheels</h3></li>
-<li><img src="images/retromobile.png"><h3>Retromobile</h3></li>
-<li><img src="images/inside.png"><h3>Inside</h3></li>
-<li><img src="images/motoclassic.png"><h3>Motoclassic</h3></li>
-<li><img src="images/motorbikes.png"><h3>Motorbikes</h3></li>
-<li><img src="images/museum.png"><h3>Museum</h3></li>
-<li><img src="images/motormax.png"><h3>MotorMax</h3></li>
-<li><img src="images/tester.png"><h3>Tester</h3></li>
-<li><img src="images/thecollector.png"><h3>The Collector</h3>
-		<p>
-Las colecciones privadas más espectaculares del mundo y sus orgullosos dueños, juntos en un mismo programa. “The Collector”: una visita guiada por los secretos mejor guardados de la industria automotriz.
-		</p>
-		</li>
-<li><img src="images/garagetv.png"><h3>Garage TV</h3></li>
-</ul>
-
-</div></div>
-
-<div id="contacto" data-url="contacto" data-role="page">
-<div data-role="header"  style="background-image: url(images/textura.jpg);" >
-<h1>	<img id="Logo" src="images/logo.png"  /> El Garage TV - Contacto</h1>
-<div data-role="navbar">
-<ul>
-<li><a href="#inicio" data-icon="star">Noticias</a></li>
-<li><a href="#programas" data-icon="grid">Programas</a></li>
-<li><a href="#contacto" data-icon="home">Contacto</a></li>
-</ul>
-</div>
-
-</div>
-
-<div data-role="content">
-
-<form id="Nombre" action="contacto.php" method="GET">
-
-<div data-role="fieldcontain">
-<label for="inp_tw49">Nombre y Apellido</label>
-<input type="text" name="nombre" id="inp_tw49" value="nombre"/>
-</div>
-
-<div data-role="fieldcontain">
-<label for="inp_tw53">E-mail</label>
-<input type="text" name="email" id="inp_tw53" value="email"/>
-</div>
-
-<div data-role="fieldcontain">
-<label for="txt_tw47">Comentario</label>
-<textarea name="" id="txt_tw47" rows="" cols=""></textarea>
-</div>
-
-
-<div data-role="controlgroup">
-<input id="enviar" type="submit" value="Enviar"/>
-<input id="Limpiar" type="reset" value="Limpiar"/>
-</div>
-</form>
-
-</div></div>
-
-</body>
+			<h2><img alt="" src="http://www.ar.elgarage.com/images/stories/flagsContact/logo_argentina.png" align="left" height="147" width="92"><strong>ARGENTINA:</strong><h2>
+            <h3> Contact: Mr Mike El-Haiek<br>
+            Av. Sir Alexander Fleming 2845<br>
+            (1640) Martinez, Bs. Aires. Argentina<br>
+            Tel.: 54 11 4836 1922 / 1929</h3>
+			
+		</div>      
+    </div>
+	
+	<!-- fin contacto -->
+    </body>
 </html>
