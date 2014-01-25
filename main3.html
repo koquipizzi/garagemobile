@@ -19,12 +19,10 @@
 		<!-- nativeDroid: Color Schemes -->
         <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
 
-		<!-- jQuery / iOS -->
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<!-- jQuery / jQueryMobile Scripts -->
         <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
 		
-		
-		<link rel="apple-touch-startup-image"  href="splashios.png" />
+		<link rel="stylesheet" href="css/idangerous.swiper.css">
 
 
     </head>
@@ -36,8 +34,8 @@
 			data       : {username : 'subin', password : 'passwordx'},
 			success    : function(response) {
 				$.each(response.noticias, function (i, noti) {              	 
-				$("#allRepos").append("<li class='noti'><h2>" + noti.title + "</h2>"
-				+ "<p class='li"+i+"'></p><div data-role='collapsible' data-content-theme='b' data-collapsed='false'><div class='inset"+ i +"'></div></div><h3 class='insetClick"+ i +"'>Ver más</h3></li>");
+				$(".swiper-slide").append("<div class='noti'><h2>" + noti.title + "</h2>"
+				+ "<p class='li"+i+"'></p><div data-role='collapsible' data-content-theme='b' data-collapsed='false'><div class='inset"+ i +"'></div></div><h3 class='insetClick"+ i +"'>Ver más</h3></div>");
 				var aux = ".li"+i;
 				var auxInset = ".inset"+i;
 				var insetClick = ".insetClick"+i;
@@ -66,6 +64,7 @@
 			    border-bottom: 1px solid #808080;
 				padding: 10px;				
 		}
+
 	</style>
     <body>
         
@@ -85,8 +84,19 @@
 		</div>
 		
 		 <div data-role="content">   
-			<ul id="allRepos" data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" data-filter="true"> 
-			</ul>
+			  <!--div class="device"-->
+				<a class="arrow-left" href="#"></a> 
+				<a class="arrow-right" href="#"></a>
+				<div class="swiper-container">
+				  <div class="swiper-wrapper">
+					<div class="swiper-slide"> 
+					
+					</div>
+					
+				  </div>
+				</div>
+				<div class="pagination"></div>
+			  <!--/div-->
 		</div>      
     </div>
     <!-- fin de pagina de inicio -->
@@ -164,5 +174,25 @@
     </div>
 	
 	<!-- fin contacto -->
+	
+	
+	<script src="lib/jquery-1.10.1.min.js"></script>
+  <script src="lib/idangerous.swiper-2.1.min.js"></script>
+  <script>
+  var mySwiper = new Swiper('.swiper-container',{
+    pagination: '.pagination',
+    loop:true,
+    grabCursor: true,
+    paginationClickable: true
+  })
+  $('.arrow-left').on('click', function(e){
+    e.preventDefault()
+    mySwiper.swipePrev()
+  })
+  $('.arrow-right').on('click', function(e){
+    e.preventDefault()
+    mySwiper.swipeNext()
+  })
+  </script>
     </body>
 </html>
