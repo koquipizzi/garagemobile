@@ -32,6 +32,7 @@
 	
     <gap:splash src="splash.png" />
 	<gap:splash src="splash/splash-screen-320x460.png" width="320" height="480" />
+	<icon src="icon.png" default="true" />
 	
 	<gap:splash src="splash/ios/Default.png" gap:platform="ios" width="320" height="480" />
 	<gap:splash src="splash/ios/Default_at_2x.png" gap:platform="ios" width="640" height="960" />
@@ -49,7 +50,7 @@
 	<icon src="splash/ios/icons/touch-icon-ipad-retina-152x152-precomposed.png" gap:platform="ios" width="152" height="152" />
 	<icon src="splash/ios/icons/touch-icon-iphone-retina-120x120-precomposed.png" gap:platform="ios" width="120" height="120" />
 	
-	<icon src="icon.png" default="true" />
+	
 
 	<!--icon src="icons/ios/icon-57-2x.png" gap:platform="ios" width="114" height="114" />
 	<icon src="icons/ios/icon-72-2x.png" gap:platform="ios" width="144" height="144" />
