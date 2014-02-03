@@ -191,7 +191,7 @@ img.ui-li-icon {
 }
 
 .ui-li-has-thumb {
-	min-height: 115px;
+/*min-height: 115px;*/
 }
 
 .ui-li-has-thumb .ui-link-inherit,.ui-li-has-thumb .ui-btn-inner.ui-li {
