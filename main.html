@@ -20,16 +20,14 @@
         <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
 
 		<!-- jQuery / iOS -->
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+		<script src="lib/jquery-1.11.0.min.js"></script>
+        <script src="lib/jquery.mobile-1.4.1.min.js"></script>		
 		
-		
-		<link rel="apple-touch-startup-image"  href="splashios.png" />
-		
-		<link rel="apple-touch-icon" href="splash/ios/icons/touch-icon-iphone-60x60-precomposed.png">
-		<link rel="apple-touch-icon" sizes="60x60" href="splash/ios/icons/touch-icon-ipad-76x76-precomposed.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="splash/ios/icons/touch-icon-iphone-retina-120x120-precomposed.png">
-		<link rel="apple-touch-icon" sizes="144x144" href="splash/ios/icons/touch-icon-ipad-retina-152x152-precomposed.png">
+		<link rel="apple-touch-startup-image"  href="splashios.png" />		
+		<link rel="apple-touch-icon" href="splash/ios/icons/apple-touch-icon-iphone-60x60-precomposed.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="splash/ios/icons/apple-touch-icon-ipad-76x76-precomposed.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="splash/ios/icons/apple-touch-icon-iphone-retina-120x120-precomposed.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="splash/ios/icons/apple-touch-icon-ipad-retina-152x152-precomposed.png">
 			
     </head>
 	
@@ -55,7 +53,8 @@
 
 			},
 			 error: function () {
-				alert('Not working!');      
+				$("#allRepos").append("Error al conectarse al servidor");
+				alert('Error en conexión con el servidor!');      
 			  
 			}      
 		});     
@@ -156,11 +155,33 @@
 		
 		 <div data-role="content">   
 
+			<ul data-role="listview" data-theme="c">  
+			<li><a href="http://www.facebook.com/elgarageargentina">  
+				<img src="images/facebook.png"/>  
+				<h3 class="ui-li-heading">Facebook</h3>  
+				<p class="ui-li-desc">Fan Page /elgarageargentina</p></a></li>  
+				  
+				<!--li><a href="image.php?imgid=2">  
+				<img src="img/college-t.jpg" />  
+				<h3 class="ui-li-heading">Colleeeeeeeeeeeeege</h3>  
+				<p class="ui-li-desc">by Scott Hill</p></a></li>  
+				  
+				<li><a href="image.php?imgid=3">  
+				<img src="img/forum-app-t.jpg"  />  
+				<h3 class="ui-li-heading">Forum app for Facebook</h3>  
+				<p class="ui-li-desc">by Ionut Zamfir</p></a></li-->  
+				  
+				<li><a href="https://twitter.com/@elgarage_tv">  
+				<img src="images/twitter.png"/>  
+				<h3 class="ui-li-heading">Twitter</h3>  
+				<p class="ui-li-desc">@elgarage_tv</p></a></li>  				
+			</ul>  
 			<h2><img alt="" src="http://www.ar.elgarage.com/images/stories/flagsContact/logo_argentina.png" align="left" height="147" width="92"><strong>ARGENTINA:</strong><h2>
             <h3> Contact: Mr Mike El-Haiek<br>
             Av. Sir Alexander Fleming 2845<br>
             (1640) Martinez, Bs. Aires. Argentina<br>
-            Tel.: 54 11 4836 1922 / 1929</h3>
+            Tel.: 54 11 4836 1922 / 1929<br>
+			contacto@elgarage.com</h3>
 			
 		</div>      
     </div>
