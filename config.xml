@@ -25,10 +25,12 @@
     <feature name="http://api.phonegap.com/1.0/media"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/notification"/>
+	<feature name="debug-server" required="false" />
 
     <preference name="fullscreen" value="true" />
     <preference name="splash-screen-duration" value="5000" />
-	<preference name="phonegap-version" value="2.9.0" /> 
+	<!--preference name="phonegap-version" value="2.9.0" /--> 
+	<preference name="phonegap-version" value="3.1.0" /> 
 	
     <gap:splash src="splash.png" />
 	<gap:splash src="splash/splash-screen-320x460.png" width="320" height="480" />
