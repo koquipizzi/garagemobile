@@ -16,6 +16,8 @@
     <author href="https://www.qwavee.com" email="alejandra@qwavee.com">
         Qwavee - Desarrollos de Sistemas
     </author>
+	
+			
     <!-- to enable individual permissions use the following examples -->
     <feature name="http://api.phonegap.com/1.0/battery"/>
     <feature name="http://api.phonegap.com/1.0/camera"/>
@@ -25,16 +27,17 @@
     <feature name="http://api.phonegap.com/1.0/media"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/notification"/>
-	<feature name="debug-server" required="false" />
 
     <preference name="fullscreen" value="true" />
     <preference name="splash-screen-duration" value="5000" />
 	<!--preference name="phonegap-version" value="2.9.0" /--> 
 	<preference name="phonegap-version" value="3.1.0" /> 
+	s
+	
+	<icon src="icon.png" default="true" />
 	
     <gap:splash src="splash.png" />
 	<gap:splash src="splash/splash-screen-320x460.png" width="320" height="480" />
-	<icon src="icon.png" default="true" />
 	
 	<gap:splash src="splash/ios/Default.png" gap:platform="ios" width="320" height="480" />
 	<gap:splash src="splash/ios/Default_at_2x.png" gap:platform="ios" width="640" height="960" />
