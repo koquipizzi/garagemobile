@@ -37,7 +37,6 @@
 	<icon src="icon.png" default="true" />
 	
     <gap:splash src="splash.png" />
-	<gap:splash src="splash/splash-screen-320x460.png" width="320" height="480" />
 	
 	<gap:splash src="splash/ios/Default.png" gap:platform="ios" width="320" height="480" />
 	<gap:splash src="splash/ios/Default_at_2x.png" gap:platform="ios" width="640" height="960" />
