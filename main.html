@@ -41,8 +41,8 @@
 			data       : {username : 'subin', password : 'passwordx'},
 			success    : function(response) {
 				$.each(response.noticias, function (i, noti) {              	 
-				$("#allRepos").append("<li class='noti'><h2>" + noti.title + "</h2>"
-				+ "<p class='li"+i+"'></p><div data-role='collapsible' data-content-theme='b' data-collapsed='false'><div class='inset"+ i +"'></div></div><h3 class='insetClick"+ i +"'>Ver más</h3></li>");
+				$("#allRepos").append("<li class='noti'><h2>" + noti.title + "</h2>"   
+				+ "<p class='li"+i+"'></p><div data-role='collapsible' data-content-theme='b' data-collapsed='false'><div class='inset"+ i +"'></div></div><a data-role='button' data-icon='arrow-u' class='insetClick"+ i +"'>-- Ver más --</a></li>");
 				var aux = ".li"+i;
 				var auxInset = ".inset"+i;
 				var insetClick = ".insetClick"+i;				
@@ -50,6 +50,13 @@
 				$(auxInset).html(noti.fulltext);  
 				$(auxInset).hide();
 				$(insetClick).click(function(){
+					$rrr = $(insetClick).find("span");						
+					var link = $(insetClick).html();
+					if(link === "-- Ver más --")
+						{$(insetClick).html("-- Ver menos --");
+						}
+					else {$(insetClick).html("-- Ver más --");
+						}
 					$(auxInset).toggle();
 				  });
 			});
@@ -57,10 +64,43 @@
 			},
 			 error: function () {
 				$("#allRepos").append("Error al conectarse al servidor");
-				alert('Error en conexión con el servidor!');      
-			  
-			}      
-		});     
+	 		}      
+		});  
+
+		$(document).ready(function() {
+		
+		$("#linkProgramas").click(function() { 
+			$("#infoprog").hide();
+			$("#listaprog").show();
+		});
+		
+		$(".volver").click(function() { 
+			$("#infoprog").hide();
+			$("#listaprog").show();
+		});
+		
+		$('.prog').click(function() { 
+			$pp = $(this).data("idn");
+			$.ajax({
+			url        : "http://www.ar.elgarage.com/index.php?option=com_content&view=article&format=rawprogramas&id="+$pp+"&jsoncallback=?",
+			data       : {username : 'subin', password : 'passwordx'},
+			success    : function(response) {
+				$.each(response.noticias, function (i, noti) {              	 
+				$("#textinfoprog").html("<li class='noti'><h2>" + noti.title + "</h2><div>" + noti.introtext + noti.fulltext +"</div>");
+				$("#infoprog").show();
+				$("#listaprog").hide();
+			});
+
+			},
+			 error: function () {
+				$("#listaprog").append("Error al conectarse al servidor. Compruebe si su conexión a Internet está activa.");
+	 		}      
+		});   
+		});
+		
+		});
+		
+		
 	 </script>
 	<style>
 		#Logo {
@@ -82,15 +122,15 @@
 			<div data-tap-toggle="false" data-role="footer" data-tap-toggle="false" data-theme="b">
 				<div data-role="navbar">
 					<ul>
-					<li><a href="#inicio" data-icon="star">Noticias</a></li>
-					<li><a href="#programas" data-icon="grid">Programas</a></li>
-					<li><a href="#contacto" data-icon="home">Contacto</a></li>
+						<li><a href="#inicio" data-icon="star" data-transition="slide">Noticias</a></li>
+						<li id="linkProgramas"><a href="#programas" data-icon="grid" data-transition="slide">Programas</a></li>
+						<li><a href="#contacto" data-icon="home" data-transition="slide">Contacto</a></li>
 					</ul>
 				</div>		
 			</div>
 		</div>
 		
-		 <div data-role="content">   
+		 <div data-role="content">   				
 			<ul id="allRepos" data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" data-filter="true"> 
 			</ul>
 		</div>      
@@ -105,36 +145,41 @@
 			<div data-tap-toggle="false" data-role="footer" data-tap-toggle="false" data-theme="b">
 				<div data-role="navbar">
 					<ul>
-					<li><a href="#inicio" data-icon="star">Noticias</a></li>
-					<li><a href="#programas" data-icon="grid">Programas</a></li>
-					<li><a href="#contacto" data-icon="home">Contacto</a></li>
+						<li><a href="#inicio" data-icon="star" data-transition="slide">Noticias</a></li>
+						<li id="linkProgramas"><a href="#programas" data-icon="grid" data-transition="slide">Programas</a></li>
+						<li><a href="#contacto" data-icon="home" data-transition="slide">Contacto</a></li>
 					</ul>
 				</div>		
 			</div>
 		</div>
 		
 		 <div data-role="content">   
-
-			<ul data-role="listview" data-inset="true">
-				<li><a href="http://www.ar.elgarage.com/tv/programas/187"><img src="images/designcenter.png"><h3>Design Center</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/106"><img src="images/crazy.png" href="http://www.ar.elgarage.com/tv/programas/106"><h3>Crazy Tuning</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/193"><img src="images/citytour.png" href="http://www.ar.elgarage.com/tv/programas/193"><h3>City Tour</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/191"><img src="images/british.png" ><h3>British Charm</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/192"><img src="images/american.png" ><h3>American Dreams</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/194"><img src="images/customized.png"><h3>Customized</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/195"><img src="images/evolutioncars.png"><h3>Evolution Cars</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/196"><img src="images/fanclub.png"><h3>Fans Club</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/197"><img src="images/holy.png"><h3>Holy Wheels</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/211"><img src="images/retromobile.png"><h3>Retromobile</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/207" ><img src="images/inside.png" ><h3>Inside</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/208"><img src="images/motoclassic.png"><h3>Motoclassic</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/209"><img src="images/motorbikes.png"><h3>Motorbikes</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/210"><img src="images/museum.png"><h3>Museum</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/214"><img src="images/motormax.png"><h3>MotorMax</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/212"><img src="images/tester.png"><h3>Tester</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/213"><img src="images/thecollector.png"><h3>The Collector</h3></a></li>
-				<li><a href="http://www.ar.elgarage.com/tv/programas/1096"><img src="images/garagetv.png"><h3>Garage TV</h3></a></li>
-			</ul>
+			<div id="infoprog" style="display:none;">
+				<div id="textinfoprog" > </div>
+				<a href="main.html#programas" class="volver" data-role="button" data-icon="arrow-l">Volver</a> 
+			</div>
+			<div id="listaprog">
+				<ul data-role="listview" data-inset="true">
+					<li><a  data-transition="slide" href="" data-idn="187" class="prog"><img src="images/designcenter.png"><h3>Design Center</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="106" class="prog"><img src="images/crazy.png"><h3>Crazy Tuning</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="193" class="prog"><img src="images/citytour.png"><h3>City Tour</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="191" class="prog"><img src="images/british.png" ><h3>British Charm</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="192" class="prog"><img src="images/american.png" ><h3>American Dreams</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="194" class="prog"><img src="images/customized.png"><h3>Customized</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="195" class="prog"><img src="images/evolutioncars.png"><h3>Evolution Cars</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="196" class="prog"><img src="images/fanclub.png"><h3>Fans Club</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="197" class="prog"><img src="images/holy.png"><h3>Holy Wheels</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="211" class="prog"><img src="images/retromobile.png"><h3>Retromobile</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="207" class="prog"><img src="images/inside.png" ><h3>Inside</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="208" class="prog"><img src="images/motoclassic.png"><h3>Motoclassic</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="209" class="prog"> <img src="images/motorbikes.png"><h3>Motorbikes</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="210" class="prog"><img src="images/museum.png"><h3>Museum</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="214" class="prog"><img src="images/motormax.png"><h3>MotorMax</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="212" class="prog"><img src="images/tester.png"><h3>Tester</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="213" class="prog"><img src="images/thecollector.png"><h3>The Collector</h3></a></li>
+					<li><a  data-transition="slide" href="" data-idn="1096" class="prog"><img src="images/garagetv.png"><h3>Garage TV</h3></a></li>
+				</ul>
+			</div>
 		</div>      
     </div>
 	
@@ -148,9 +193,9 @@
 			<div data-tap-toggle="false" data-role="footer" data-tap-toggle="false" data-theme="b">
 				<div data-role="navbar">
 					<ul>
-					<li><a href="#inicio" data-icon="star">Noticias</a></li>
-					<li><a href="#programas" data-icon="grid">Programas</a></li>
-					<li><a href="#contacto" data-icon="home">Contacto</a></li>
+						<li><a href="#inicio" data-icon="star" data-transition="slide">Noticias</a></li>
+						<li id="linkProgramas"><a href="#programas" data-icon="grid" data-transition="slide">Programas</a></li>
+						<li><a href="#contacto" data-icon="home" data-transition="slide">Contacto</a></li>
 					</ul>
 				</div>		
 			</div>
@@ -162,7 +207,7 @@
 			<li><a href="http://www.facebook.com/elgarageargentina">  
 				<img src="images/facebook.png"/>  
 				<h3 class="ui-li-heading">Facebook</h3>  
-				<p class="ui-li-desc">Fan Page /elgarageargentina</p></a></li>  
+				<p class="ui-li-desc">/elgarageargentina</p></a></li>  
 				  
 				<!--li><a href="image.php?imgid=2">  
 				<img src="img/college-t.jpg" />  
