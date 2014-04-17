@@ -36,14 +36,14 @@
 	
 	<script type="text/javascript">	
 
-$.ajax({
+	  $.ajax({
 			url        : "http://www.ar.elgarage.com/index.php?option=com_content&view=article&format=raw&id=34&jsoncallback=?",
 			data       : {username : 'subin', password : 'passwordx'},
 			success    : function(response) {
 				$.each(response.noticias, function (i, noti) {              	 
-				$("#allRepos").append("<li class='noti'><h2>" + noti.title + "</h2>"
-+ "<p class='li"+i+"'></p><div data-role='collapsible' data-content-theme='b' data-collapsed='false'><div class='inset"+ i +"'></div></div><h3 class='insetClick"+ i +"'>-- Ver más --</h3></li>");
-var aux = ".li"+i;
+				$("#allRepos").append("<div data-nativedroid-role='screenslide'><div class='noti'><h2>" + noti.title + "</h2>"   
+				+ "<p class='li"+i+"'></p><div data-role='collapsible' data-content-theme='b' data-collapsed='false'><div class='inset"+ i +"'></div></div><a data-role='button' data-icon='arrow-u' class='insetClick"+ i +"'>-- Ver más --</a></div></div>");
+				var aux = ".li"+i;
 				var auxInset = ".inset"+i;
 				var insetClick = ".insetClick"+i;				
 				$(aux).html(noti.introtext);  
@@ -53,9 +53,9 @@ var aux = ".li"+i;
 					$rrr = $(insetClick).find("span");						
 					var link = $(insetClick).html();
 					if(link === "-- Ver más --")
-						{$(insetClick).html("-- Ver menos --");						
+						{$(insetClick).html("-- Ver menos --");
 						}
-					else {$(insetClick).html("-- Ver más --");						
+					else {$(insetClick).html("-- Ver más --");
 						}
 					$(auxInset).toggle();
 				  });
@@ -116,6 +116,7 @@ var aux = ".li"+i;
     <body>
         
     <div  id="inicio" data-url="inicio"  data-role="page" data-theme="b">
+
         <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b"  style="background-image: url(images/textura.jpg);">
             <h1><img id="Logo" src="images/logo.png"  />El Garage TV</h1>
             <a href="http://elgarage.com/" data-ajax='false' target='_blank'></a>
@@ -130,9 +131,9 @@ var aux = ".li"+i;
 			</div>
 		</div>
 		
-		 <div data-role="content">   				
-			<ul id="allRepos" data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" data-filter="true"> 
-			</ul>
+		 <div data-role="content">
+			<div data-nativedroid-plugin="homescreen" id="allRepos" > 
+			</div>
 		</div>      
     </div>
     <!-- fin de pagina de inicio -->
@@ -177,7 +178,7 @@ var aux = ".li"+i;
 					<li><a  data-transition="slide" href="" data-idn="214" class="prog"><img src="images/motormax.png"><h3>MotorMax</h3></a></li>
 					<li><a  data-transition="slide" href="" data-idn="212" class="prog"><img src="images/tester.png"><h3>Tester</h3></a></li>
 					<li><a  data-transition="slide" href="" data-idn="213" class="prog"><img src="images/thecollector.png"><h3>The Collector</h3></a></li>
-					<!--li><a  data-transition="slide" href="" data-idn="1096" class="prog"><img src="images/garagetv.png"><h3>Garage TV</h3></a></li-->
+					<li><a  data-transition="slide" href="" data-idn="1096" class="prog"><img src="images/garagetv.png"><h3>Garage TV</h3></a></li>
 				</ul>
 			</div>
 		</div>      
