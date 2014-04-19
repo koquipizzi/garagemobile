@@ -9,6 +9,7 @@
 
 		<!-- jQueryMobileCSS - original without styling -->
         <link rel="stylesheet" href="css/jquerymobile.css" />
+		<link rel="stylesheet" href="css/spin.css" />
 
 		<!-- nativeDroid core CSS -->
         <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
@@ -35,40 +36,48 @@
     </head>
 	
 	<script type="text/javascript">	
-
-$.ajax({
-			url        : "http://www.ar.elgarage.com/index.php?option=com_content&view=article&format=raw&id=34&jsoncallback=?",
-			data       : {username : 'subin', password : 'passwordx'},
-			success    : function(response) {
-				$.each(response.noticias, function (i, noti) {              	 
-				$("#allRepos").append("<li class='noti'><h2>" + noti.title + "</h2>"
-+ "<p class='li"+i+"'></p><div data-role='collapsible' data-content-theme='b' data-collapsed='false'><div class='inset"+ i +"'></div></div><h3 class='insetClick"+ i +"'>-- Ver más --</h3></li>");
-var aux = ".li"+i;
-				var auxInset = ".inset"+i;
-				var insetClick = ".insetClick"+i;				
-				$(aux).html(noti.introtext);  
-				$(auxInset).html(noti.fulltext);  
-				$(auxInset).hide();
-				$(insetClick).click(function(){
-					$rrr = $(insetClick).find("span");						
-					var link = $(insetClick).html();
-					if(link === "-- Ver más --")
-						{$(insetClick).html("-- Ver menos --");						
-						}
-					else {$(insetClick).html("-- Ver más --");						
-						}
-					$(auxInset).toggle();
-				  });
-			});
-
-			},
-			 error: function () {
-				$("#allRepos").append("Error al conectarse al servidor");
-	 		}      
-		});  
+	
+	function loadContent(){
+		$.ajax({
+					url        : "http://www.ar.elgarage.com/index.php?option=com_content&view=article&format=raw&id=34&jsoncallback=?",
+					data       : {username : 'subin', password : 'passwordx'},
+					beforeSend: function() {
+						 $body.addClass("loading");
+					},
+					success    : function(response) {
+						$.each(response.noticias, function (i, noti) {              	 
+						$("#allRepos").append("<li class='noti'><h2>" + noti.title + "</h2>"
+		+ "<p class='li"+i+"'></p><div data-role='collapsible' data-content-theme='b' data-collapsed='false'><div class='inset"+ i +"'></div></div><h3 class='insetClick"+ i +"'>-- Ver más --</h3></li>");
+		var aux = ".li"+i;
+						var auxInset = ".inset"+i;
+						var insetClick = ".insetClick"+i;				
+						$(aux).html(noti.introtext);  
+						$(auxInset).html(noti.fulltext);  
+						$(auxInset).hide();
+						$(insetClick).click(function(){
+							$rrr = $(insetClick).find("span");						
+							var link = $(insetClick).html();
+							if(link === "-- Ver más --")
+								{$(insetClick).html("-- Ver menos --");						
+								}
+							else {$(insetClick).html("-- Ver más --");						
+								}
+							$(auxInset).toggle();
+						  });
+					});
+						$body.removeClass("loading");
+					},
+					 error: function () {
+						$("#allRepos").append("Error al conectarse al servidor");
+					}      
+				});  
+				
+		}
 
 		$(document).ready(function() {
 		
+		$body = $("body");
+		loadContent();
 		$("#linkProgramas").click(function() { 
 			$("#infoprog").hide();
 			$("#listaprog").show();
@@ -114,7 +123,10 @@ var aux = ".li"+i;
 		}
 	</style>
     <body>
+	<div class="modal"></div>
         
+	
+
     <div  id="inicio" data-url="inicio"  data-role="page" data-theme="b">
         <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b"  style="background-image: url(images/textura.jpg);">
             <h1><img id="Logo" src="images/logo.png"  />El Garage TV</h1>
@@ -125,6 +137,7 @@ var aux = ".li"+i;
 						<li><a href="#inicio" data-icon="star" data-transition="slide">Noticias</a></li>
 						<li id="linkProgramas"><a href="#programas" data-icon="grid" data-transition="slide">Programas</a></li>
 						<li><a href="#contacto" data-icon="home" data-transition="slide">Contacto</a></li>
+						<li><a href="#inicio" data-icon="refresh" data-transition="slide" onclick="loadContent();" >Refrescar</a></li>
 					</ul>
 				</div>		
 			</div>
@@ -148,6 +161,7 @@ var aux = ".li"+i;
 						<li><a href="#inicio" data-icon="star" data-transition="slide">Noticias</a></li>
 						<li id="linkProgramas"><a href="#programas" data-icon="grid" data-transition="slide">Programas</a></li>
 						<li><a href="#contacto" data-icon="home" data-transition="slide">Contacto</a></li>
+						<li><a href="#inicio" data-icon="refresh" data-transition="slide" onclick="loadContent();" >Refrescar</a></li>
 					</ul>
 				</div>		
 			</div>
@@ -196,6 +210,7 @@ var aux = ".li"+i;
 						<li><a href="#inicio" data-icon="star" data-transition="slide">Noticias</a></li>
 						<li id="linkProgramas"><a href="#programas" data-icon="grid" data-transition="slide">Programas</a></li>
 						<li><a href="#contacto" data-icon="home" data-transition="slide">Contacto</a></li>
+						<li><a href="#inicio" data-icon="refresh" data-transition="slide" onclick="loadContent();" >Refrescar</a></li>
 					</ul>
 				</div>		
 			</div>
